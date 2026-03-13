@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nikki Beach Hotels & Resorts - Psychometric Assessment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo-container">
+                <img src="https://nikkibeach.com/wp-content/themes/nikkibeach/assets/images/nikki-beach-logo.svg" alt="Nikki Beach Hotels & Resorts" class="logo" onerror="this.style.display='none'; document.querySelector('.logo-text').style.display='block';">
+                <h1 class="logo-text" style="display:none;">NIKKI BEACH<br><span>HOTELS & RESORTS</span></h1>
+            </div>
+            <p class="tagline">Celebrate Life - Psychometric Assessment</p>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        <!-- Welcome Screen -->
+        <section id="welcomeScreen" class="screen active">
+            <div class="container">
+                <div class="welcome-content">
+                    <h2 class="section-title">Welcome to Our Psychometric Assessment</h2>
+                    <div class="intro-text">
+                        <p>Thank you for your interest in joining the Nikki Beach family. At Nikki Beach, we blend music, dining, entertainment, fashion, film, and art to create unforgettable experiences.</p>
+                        <p>This assessment will help us understand your unique strengths, personality traits, and competencies to ensure the best fit for both you and our organization.</p>
+                    </div>
+                    
+                    <div class="assessment-info">
+                        <div class="info-card">
+                            <i class="fas fa-clock"></i>
+                            <h3>Duration</h3>
+                            <p>30-45 minutes</p>
+                        </div>
+                        <div class="info-card">
+                            <i class="fas fa-question-circle"></i>
+                            <h3>Questions</h3>
+                            <p>30-40 questions</p>
+                        </div>
+                        <div class="info-card">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>Assessment Areas</h3>
+                            <p>Personality, Skills, Competencies</p>
+                        </div>
+                    </div>
+
+                    <div class="instructions">
+                        <h3>Instructions:</h3>
+                        <ul>
+                            <li>Answer all questions honestly - there are no right or wrong answers</li>
+                            <li>Choose the response that best reflects your natural behavior</li>
+                            <li>Complete the assessment in one sitting</li>
+                            <li>Your responses will be kept confidential</li>
+                        </ul>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="startAssessment()">Begin Assessment</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Candidate Information Screen -->
+        <section id="candidateInfoScreen" class="screen">
+            <div class="container">
+                <div class="form-container">
+                    <h2 class="section-title">Candidate Information</h2>
+                    <p class="form-description">Please provide your details to begin the assessment</p>
+                    
+                    <form id="candidateForm">
+                        <div class="form-group">
+                            <label for="fullName">Full Name *</label>
+                            <input type="text" id="fullName" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="position">Position Level *</label>
+                            <select id="position" required>
+                                <option value="">Select Position Level</option>
+                                <option value="line-staff">Line Staff</option>
+                                <option value="managerial">Managerial Level</option>
+                                <option value="senior-management">Senior Management</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="location">Preferred Location</label>
+                            <input type="text" id="location" placeholder="e.g., Dubai, Santorini, Koh Samui">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="experience">Years of Experience in Hospitality</label>
+                            <input type="number" id="experience" min="0" max="50">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Continue to Assessment</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Assessment Screen -->
+        <section id="assessmentScreen" class="screen">
+            <div class="container">
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressBar"></div>
+                    </div>
+                    <p class="progress-text">Question <span id="currentQuestion">1</span> of <span id="totalQuestions">30</span></p>
+                </div>
+
+                <div class="question-container">
+                    <h3 class="question-text" id="questionText"></h3>
+                    <div class="options-container" id="optionsContainer"></div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button class="btn btn-secondary" id="prevBtn" onclick="previousQuestion()" style="display:none;">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Screen -->
+        <section id="resultsScreen" class="screen">
+            <div class="container">
+                <div class="results-container">
+                    <h2 class="section-title">Assessment Complete!</h2>
+                    <p class="results-intro">Thank you for completing the Nikki Beach psychometric assessment. Below is your comprehensive profile.</p>
+                    
+                    <div class="results-content" id="resultsContent"></div>
+                    
+                    <div class="submit-results">
+                        <h3>Submit Your Results</h3>
+                        <p>Click the button below to send your results to our HR team. You will also receive a copy via email.</p>
+                        <button class="btn btn-primary" onclick="submitResults()">
+                            <i class="fas fa-paper-plane"></i> Submit Results to HR
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Thank You Screen -->
+        <section id="thankYouScreen" class="screen">
+            <div class="container">
+                <div class="thankyou-content">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h2 class="section-title">Thank You!</h2>
+                    <p>Your assessment has been successfully submitted to our HR team.</p>
+                    <p>We will review your results and contact you within 5-7 business days.</p>
+                    <div class="contact-info">
+                        <p><i class="fas fa-envelope"></i> wael.rakha@nikkibeachhotels.com</p>
+                        <p><i class="fas fa-globe"></i> www.nikkibeach.com</p>
+                    </div>
+                    <p class="celebrate">Celebrate Life with Nikki Beach!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Nikki Beach Hotels & Resorts. All Rights Reserved.</p>
+            <p>Celebrating Life Since 1998</p>
+        </div>
+    </footer>
+
+    <script src="js/questions.js"></script>
+    <script src="js/assessment.js"></script>
+</body>
+</html>
